@@ -36,10 +36,18 @@ Miki Tebeka
 
 ### Code
 
-TBD
+
+- [value.go](value/value.go) - Custom serialization
+- [vm.go](vm/vm.go) - Missing vs Zero values
+- [logs.go](logs/logs.go) - Streaming JSON
+- [closure.go](closure/closure.go) - Closure capture bug (Go 1.22)
+- [client.go](events/client.go) - Making HTTP calls
 
 ### Links
 
+- [HTTP Status Cats](https://http.cat/)
+- [Unicode Folding](https://www.unicode.org/L2/L2000/00261-tr25-0d1.html)
+- [Fixing For Loops in Go 1.22](https://go.dev/blog/loopvar-preview)
 - [JSON - The Fine Print](https://www.ardanlabs.com/blog/2024/10/json-the-fine-print-part-1.html)
 - [HTTP cats](https://http.cat/)
 
