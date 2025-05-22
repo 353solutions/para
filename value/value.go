@@ -77,6 +77,39 @@ func main() {
 		return
 	}
 	fmt.Printf("%#v\n", v2)
+
+	fmt.Println(v)
+}
+
+// Different message on same endpoint
+/*
+{
+	"type": "login",
+	"payload": {
+		"user": "elliot"
+	}
+}
+
+{
+	"type": "access",
+	"payload": {
+		"uri": "file:///etc/passwd"
+	}
+}
+*/
+
+type Message struct {
+	Type    string
+	Payload json.RawMessage // json won't decode this
+}
+
+type Login struct{}
+type Access struct{}
+
+// implement fmt.Stringer
+func (v Value) String() string {
+	return "I'm a value"
+
 }
 
 // https://github.com/353solutions/para
