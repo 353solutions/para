@@ -45,6 +45,15 @@ Miki Tebeka
 
 ### Links
 
+- [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem)
+- [golang.org/x/analysis](https://pkg.go.dev/golang.org/x/tools/go/analysis) - Write a linter
+- [mapstructure](https://pkg.go.dev/github.com/mitchellh/mapstructure#example-Decode)
+- Validation
+    - [cue](https://cuelang.org/docs/introduction/)
+    - [validator](https://github.com/go-playground/validator)
+- [NYC Taxi Dataset](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+- [Email Address Regexp](https://emailregex.com/index.html)
+- [JSON Lines](https://jsonlines.org/)
 - [HTTP Status Cats](https://http.cat/)
 - [Unicode Folding](https://www.unicode.org/L2/L2000/00261-tr25-0d1.html)
 - [Fixing For Loops in Go 1.22](https://go.dev/blog/loopvar-preview)
