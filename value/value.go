@@ -70,10 +70,33 @@ func main() {
 		return
 	}
 	fmt.Println(string(data))
+
+	var v2 Value
+	if err := json.Unmarshal(data, &v2); err != nil {
+		fmt.Println("ERROR:", err)
+		return
+	}
+	fmt.Printf("%#v\n", v2)
 }
+
+// https://github.com/353solutions/para
 
 // Exercise: Implement json.Unmarshaler for Value
 // Hint: fmt.Sscanf
+
+func (v *Value) UnmarshalJSON(data []byte) error {
+	// Trim surrounding "" in "20.300000cm"
+	s := string(data[1 : len(data)-1])
+	var a float64
+	var u Unit
+	if _, err := fmt.Sscanf(s, "%f%s", &a, &u); err != nil {
+		return err
+	}
+
+	v.Amount = a
+	v.Unit = u
+	return nil
+}
 
 // Use value receiver, it'll work both for values & pointers
 func (v Value) MarshalJSON() ([]byte, error) {
