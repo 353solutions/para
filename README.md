@@ -45,6 +45,15 @@ Miki Tebeka
 
 ### Links
 
+- Web Frameworks
+    - [chi](https://go-chi.io/)
+    - [Gin](https://gin-gonic.com/)
+    - [fasthttp](https://github.com/valyala/fasthttp)
+- [How I write HTTP services in Go after 13 years](https://grafana.com/blog/2024/02/09/how-i-write-http-services-in-go-after-13-years/)
+- [Making & Using HTTP Middleware](https://www.alexedwards.net/blog/making-and-using-middleware)
+- Dependency injection:
+    - [Uber fx](https://github.com/uber-go/fx)
+    - [Google wire](https://github.com/google/wire)
 - [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem)
 - [golang.org/x/analysis](https://pkg.go.dev/golang.org/x/tools/go/analysis) - Write a linter
 - [mapstructure](https://pkg.go.dev/github.com/mitchellh/mapstructure#example-Decode)
