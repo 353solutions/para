@@ -1,5 +1,5 @@
-module paragon
+module para
 
 go 1.24
 
-// go mod init paragon
+// go mod init para

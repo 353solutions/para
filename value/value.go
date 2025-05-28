@@ -112,8 +112,6 @@ func (v Value) String() string {
 
 }
 
-// https://github.com/353solutions/para
-
 // Exercise: Implement json.Unmarshaler for Value
 // Hint: fmt.Sscanf
 
