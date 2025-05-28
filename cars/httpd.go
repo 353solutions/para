@@ -15,6 +15,12 @@ Create a database and add it to API
 Write a handler that gets an event and inserts it to the database
 
 $ curl -d@_extra/event.json http://localhost:8080/rides
+
+CRUD -> REST HTTP Verbs
+- Create: POST
+- Read: GET
+- Update: PUT, PATCH
+- Delete: DELETE
 */
 
 func main() {
