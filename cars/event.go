@@ -7,7 +7,7 @@ import (
 
 type Event struct {
 	ID   string    `json:"id"`
-	Time time.Time `json:"start"`
+	Time time.Time `json:"time"`
 	Lat  float64   `json:"lat"`
 	Lng  float64   `json:"lng"`
 }
