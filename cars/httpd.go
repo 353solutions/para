@@ -2,6 +2,8 @@ package main
 
 import (
 	// _ "expvar" // for side effect of registering in default mux
+
+	"context"
 	"encoding/json"
 	"expvar"
 	"fmt"
@@ -26,7 +28,7 @@ CRUD -> REST HTTP Verbs
 
 /* Install go 1.24
 $ ./_extra/update-go 1.24.3
-$ ~/go/bin/go1.24.3 verion
+$ ~/go/bin/go1.24.3 version
 $ alias go=~/go/bin/go1.24.3
 */
 
@@ -48,8 +50,19 @@ func main() {
 	// http.HandleFunc("GET /health", healthHandler)
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /health", api.healthHandler)
-	mux.HandleFunc("POST /rides", api.insertHandler)
+	// mux.HandleFunc("POST /rides", api.insertHandler)
+	// Wrap single handler
+	h := topMiddleware(log, http.HandlerFunc(api.insertHandler))
+	// Example: Wrap everything
+	// h := topMiddleware(log, mux)
+	// server.Handler = h
+	mux.Handle("POST /rides", h)
 	mux.Handle("GET /debug/vars", expvar.Handler())
+	mux.HandleFunc("GET /rides/{id}", api.getHandler)
+
+	// Built-in router
+	// End with / - prefix match (/users/: /users/a, /users/b ...)
+	// Otherwise - exact match
 
 	srv := http.Server{
 		Addr:    ":8080",
@@ -59,6 +72,8 @@ func main() {
 		// TODO: More timeouts
 	}
 
+	//mapDemo()
+
 	log.Info("server starting", "address", srv.Addr)
 	if err := srv.ListenAndServe(); err != nil {
 		fmt.Fprintf(os.Stderr, "error: %s\n", err)
@@ -66,7 +81,80 @@ func main() {
 	}
 }
 
+func (a *API) getHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.PathValue("id")
+	a.log.Info("get", "id", id)
+
+	fmt.Fprintln(w, "OK")
+}
+
+func mapDemo() {
+	m := map[any]any{}
+
+	type keyType string
+	var key keyType = "a"
+	m["a"] = 1
+	m[key] = 2
+	fmt.Println(m) // [a:2 a:1]
+}
+
+type ctxVars struct {
+	Login string
+	// TODO: More info
+}
+
+// Unexported so only our code can use it
+type ctxKeyType string
+
+var ctxKey ctxKeyType = "params"
+
+func getCtxVars(ctx context.Context) *ctxVars {
+	val := ctx.Value(ctxKey)
+	if val == nil {
+		return &ctxVars{}
+	}
+
+	v, ok := val.(*ctxVars)
+	if !ok {
+		// TODO: Log? panic?
+		return &ctxVars{}
+	}
+	return v
+}
+
+// Middleware: function that gets http.Handler and return http.Handler
+func topMiddleware(log *slog.Logger, h http.Handler) http.Handler {
+	fn := func(w http.ResponseWriter, r *http.Request) {
+		// pre handler
+
+		log.Info("request", "method", r.Method, "path", r.URL.Path)
+
+		user, passwd, ok := r.BasicAuth()
+		if !ok || !(user == "joe" && passwd == "baz00ka") {
+			log.Error("bad auth", "user", user, "remote", r.RemoteAddr)
+			http.Error(w, "bad auth", http.StatusUnauthorized)
+			return
+		}
+
+		// Passed down to handler
+		v := ctxVars{
+			Login: user,
+		}
+		ctx := context.WithValue(r.Context(), ctxKey, &v)
+		r = r.WithContext(ctx)
+
+		h.ServeHTTP(w, r) // next handler
+
+		// post handler
+		// Wrap to get things (such as status code)
+	}
+
+	return http.HandlerFunc(fn)
+}
+
 func (a *API) insertHandler(w http.ResponseWriter, r *http.Request) {
+	v := getCtxVars(r.Context())
+	a.log.Info("insert", "login", v.Login)
 	// Parse + Validate data
 	var e Event
 	if err := json.NewDecoder(r.Body).Decode(&e); err != nil {
@@ -112,3 +200,11 @@ type API struct {
 	log *slog.Logger
 	db  *DB
 }
+
+/* Software layers
+
+API
+Business
+Data
+
+*/
