@@ -35,6 +35,8 @@ Miki Tebeka
 ### Code
 
 
+- [cars](cars/) - HTTP Server
+
 - [value.go](value/value.go) - Custom serialization
 - [vm.go](vm/vm.go) - Missing vs Zero values
 - [logs.go](logs/logs.go) - Streaming JSON
@@ -43,6 +45,11 @@ Miki Tebeka
 
 ### Links
 
+- [The complete guide to Go net/http timeouts](https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/)
+- [Server Side Events in Go](https://medium.com/@rian.eka.cahya/server-sent-event-sse-with-go-10592d9c2aa1)
+- [httptest](https://pkg.go.dev/net/http/httptest) - Test your HTTP handlers
+- [How SQLite is Tested](https://www.sqlite.org/testing.html)
+- [Managing Go Installations](https://go.dev/doc/manage-install)
 - Web Frameworks
     - [chi](https://go-chi.io/)
     - [Gin](https://gin-gonic.com/)
@@ -69,5 +76,6 @@ Miki Tebeka
 
 ### Data & Other
 
+- [event.json](_extra/event.json)
 - [Syllabus](_extra/syllabus.pdf)
 

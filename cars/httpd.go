@@ -85,7 +85,34 @@ func (a *API) getHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.PathValue("id")
 	a.log.Info("get", "id", id)
 
-	fmt.Fprintln(w, "OK")
+	// TODO: Stream (iter.Seq, goroutine + channel ...)
+	events, err := a.db.Get(id)
+	if err != nil {
+		slog.Warn("no results", "id", id)
+		http.Error(w, "not fond", http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("content-type", "application/json")
+	enc := json.NewEncoder(w)
+	c := http.NewResponseController(w)
+	for _, e := range events {
+		if err := enc.Encode(e); err != nil {
+			a.log.Error("encode", "error", err)
+			return
+		}
+		if err := c.Flush(); err != nil {
+			a.log.Error("flush", "error", err)
+			return
+		}
+		time.Sleep(time.Second)
+	}
+
+	/*
+		if err := writeJSON(w, events); err != nil {
+			a.log.Error("write", "error", err)
+		}
+	*/
 }
 
 func mapDemo() {
