@@ -31,8 +31,8 @@ func (m *Matrix) index(row, col int) int {
 func (m *Matrix) Sum() float64 {
 	total := 0.0
 
-	for col := range m.Cols {
-		for row := range m.Rows {
+	for row := range m.Rows {
+		for col := range m.Cols {
 			i := m.index(row, col)
 			total += m.data[i]
 		}

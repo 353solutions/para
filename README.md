@@ -91,10 +91,17 @@ Miki Tebeka
 
 ### Code
 
-TBD
+- [tokenizer](tokenizer) - Optimizing algorithm & memory allocations
+- [slice.go](slice/slice.go) - How slices work
+- [playground.go](playground/playground.go) - Misc
+- [store](store) - Cache & better serialization
+- [matrix.go](matrix/matrix.go) - Getting friendly with the CPU cache
 
 ### Links
 
+- [Trie](https://en.wikipedia.org/wiki/Trie)
+- [K-D tree](https://en.wikipedia.org/wiki/K-d_tree)
+- [lru-cache](https://pkg.go.dev/github.com/hashicorp/golang-lru/v2)
 - [The Architecture of Open Source Applications](https://aosabook.org/en/) - Including a book on performance
 - [Plain Text](https://www.youtube.com/watch?v=4mRxIgu9R70) - Fun talk about Unicode
 - [Regular Expression Matching Can Be Simple And Fast](https://swtch.com/~rsc/regexp/regexp1.html)
