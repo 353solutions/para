@@ -28,7 +28,22 @@ Bench
 go test -run ^$ -bench . -count 7 | go tool benchstat -
 go test -run ^$ -bench . -count 7 | benchstat -
 
-Profile
+Profile CPU
 go test -run ^$ -bench . -cpuprofile cpu.pprof
 
+View CPU Profile
+go tool pprof -http :8081 tokenizer.test cpu.pprof
+
+Compare Runs
+go test -run ^$ -bench . -count 7 | tee orig.txt
+<change the code>
+go test -run ^$ -bench . -count 7 | tee new.txt
+go tool benchstat orig.txt new.txt
+
+Benchmark & Profile Memory
+go test -run ^$ -bench . -count 7 -memprofile mem.pprof -benchmem
+go test -run ^$ -bench . -count 7 -memprofile mem.pprof -benchmem  | go tool benchstat -
+
+View Memory Profile
+go tool pprof -http :8081 tokenizer.test mem.pprof
 */
