@@ -1,6 +1,8 @@
 package tokenizer
 
-import "testing"
+import (
+	"testing"
+)
 
 var text = `
 TO THE RED-HEADED LEAGUE: On account of the bequest of the late

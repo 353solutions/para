@@ -8,7 +8,10 @@ import (
 func Tokenize(text string) []string {
 	words := initialSplit(text)
 
-	var tokens []string
+	// Research (2026-06-08) shows we lose 5% of words
+	size := int(0.95 * float64(len(words)))
+	//var tokens []string
+	tokens := make([]string, 0, size)
 	for _, tok := range words {
 		tok = strings.ToLower(tok)
 		if IsStop(tok) {
@@ -28,7 +31,33 @@ func Tokenize(text string) []string {
 var wordRe = regexp.MustCompile(`[a-zA-Z]+`)
 
 func initialSplit(text string) []string {
-	return wordRe.FindAllString(text, -1)
+	// return wordRe.FindAllString(text, -1)
+	size := len(text) / 5 // average case has 20% tokens
+	fs := make([]string, 0, size)
+	i := 0
+	for i < len(text) {
+		// eat start
+		for i < len(text) && !isLetter(text[i]) {
+			i++
+		}
+
+		if i == len(text) {
+			break
+		}
+
+		j := i + 1
+		for j < len(text) && isLetter(text[j]) {
+			j++
+		}
+		fs = append(fs, text[i:j])
+
+		i = j
+	}
+	return fs
+}
+
+func isLetter(b byte) bool {
+	return (b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z')
 }
 
 var suffixes = []string{"ed", "ing", "s"}

@@ -27,4 +27,9 @@ func appendInt(s []int, n int) []int {
 	s = s[:len(s)+1]
 	s[len(s)-1] = n
 	return s
+
+	/*
+		var a [10]int // array
+		m := a[:]     // slice looking at a
+	*/
 }
