@@ -49,3 +49,17 @@ go test -run ^$ -bench . -count 7 -memprofile mem.pprof -benchmem  | go tool ben
 View Memory Profile
 go tool pprof -http :8081 tokenizer.test mem.pprof
 */
+
+/* io.Reader design
+
+Go
+type Reader interface {
+	Read([]byte) (int, error)
+}
+
+Python
+type Reader interface {
+	Read(n int) ([]byte, error)
+}
+
+*/
