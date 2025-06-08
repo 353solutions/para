@@ -21,3 +21,14 @@ func BenchmarkTokenize(b *testing.B) {
 		}
 	}
 }
+
+/* Running
+
+Bench
+go test -run ^$ -bench . -count 7 | go tool benchstat -
+go test -run ^$ -bench . -count 7 | benchstat -
+
+Profile
+go test -run ^$ -bench . -cpuprofile cpu.pprof
+
+*/

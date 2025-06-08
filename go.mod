@@ -4,9 +4,18 @@ go 1.24
 
 // go mod init para
 
+tool golang.org/x/perf/cmd/benchstat
+
+// go install golang.org/x/perf/cmd/benchstat@latest
+// Will be at $(go env GOPATH)/bin
+
 require (
 	github.com/google/uuid v1.6.0
 	go.etcd.io/bbolt v1.4.0
 )
 
-require golang.org/x/sys v0.29.0 // indirect
+require (
+	github.com/aclements/go-moremath v0.0.0-20210112150236-f10218a38794 // indirect
+	golang.org/x/perf v0.0.0-20250605212013-b481878a17be // indirect
+	golang.org/x/sys v0.33.0 // indirect
+)

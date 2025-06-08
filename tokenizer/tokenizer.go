@@ -6,26 +6,6 @@ import (
 	"strings"
 )
 
-var suffixes = []string{"ed", "ing", "s"}
-
-// working, works, worked -> work
-func Stem(word string) string {
-	for _, s := range suffixes {
-		if strings.HasSuffix(word, s) {
-			return word[:len(word)-len(s)]
-		}
-	}
-
-	return word
-}
-
-// "Who's on first?" -> [who s on first]
-var wordRe = regexp.MustCompile(`[a-zA-Z]+`)
-
-func initialSplit(text string) []string {
-	return wordRe.FindAllString(text, -1)
-}
-
 func Tokenize(text string) []string {
 	words := initialSplit(text)
 
@@ -43,6 +23,26 @@ func Tokenize(text string) []string {
 	}
 
 	return tokens
+}
+
+// "Who's on first?" -> [who s on first]
+var wordRe = regexp.MustCompile(`[a-zA-Z]+`)
+
+func initialSplit(text string) []string {
+	return wordRe.FindAllString(text, -1)
+}
+
+var suffixes = []string{"ed", "ing", "s"}
+
+// working, works, worked -> work
+func Stem(word string) string {
+	for _, s := range suffixes {
+		if strings.HasSuffix(word, s) {
+			return word[:len(word)-len(s)]
+		}
+	}
+
+	return word
 }
 
 func IsStop(word string) bool {
