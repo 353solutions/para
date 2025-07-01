@@ -13,7 +13,9 @@ they math the ones in the index file.
   - If there's a mismatch, print the offending file(s) and exit the program with
     non-zero value
 
-Get https://storage.googleapis.com/353solutions/c/data/taxi.tar and unpack it.
+$ curl -LO  https://storage.googleapis.com/353solutions/c/data/taxi.tar
+$ tar xf taxi.tar
+
 The index file is sha256sum.txt
 */
 package main
