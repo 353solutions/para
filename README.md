@@ -130,7 +130,11 @@ Miki Tebeka
 
 ### Code
 
-TBD
+
+- [go_chan.go](go_chan/go_chan.go) - Channel semantics, fan-out, goroutine pool
+- [rtb.go](rtb/rtb.go) - Context & cancellation
+- [taxi.go](taxi/taxi.go) - Convert serial code to concurrent
+- [fan_in.go](fan_in/fan_in.go) - Fan-in pattern
 
 ### Links
 
@@ -150,6 +154,10 @@ TBD
 - [Concurrency is not Parallelism](https://www.youtube.com/watch?v=cN_DpYBzKso) by Rob Pike
 - [Scheduling in Go](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html) by Bill Kennedy
 - [conc: better structured concurrency for go](https://github.com/sourcegraph/conc)
+- [xkcd Tar](https://xkcd.com/1168/)
+- [Profile-guided optimization](https://go.dev/doc/pgo)
+- [Rubber Duck Debugging](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
+- [Feynman Algorithm](https://wiki.c2.com/?FeynmanAlgorithm)
 
 
 ### Data & More

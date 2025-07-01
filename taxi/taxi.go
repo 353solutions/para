@@ -17,7 +17,9 @@ $ cd /tmp
 $ curl -LO  https://storage.googleapis.com/353solutions/c/data/taxi.tar
 $ tar xf taxi.tar
 
-The index file is sha256sum.txt
+# The index file is sha256sum.txt
+
+Extra: Limit number of goroutines to "n" (say 4)
 */
 package main
 
@@ -51,18 +53,30 @@ func main() {
 
 	start := time.Now()
 	ok := true
+	// unbuffered will deadlock since sigWorker is stuck sending to ch
+	// and we read it only after launching all goroutines
+	ch := make(chan result, len(sigs))
+	sema := make(chan bool, 4)
 	for name, signature := range sigs {
+		sema <- ok
 		fileName := path.Join(rootDir, name) + ".bz2"
-		sig, err := fileSig(fileName)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "error: %s - %s\n", fileName, err)
+		go func() {
+			defer func() { <-sema }()
+			sigWorker(fileName, signature, ch)
+		}()
+	}
+
+	for range sigs {
+		r := <-ch
+		if r.err != nil {
+			fmt.Fprintf(os.Stderr, "error: %s - %s\n", r.fileName, r.err)
 			ok = false
 			continue
 		}
 
-		if sig != signature {
+		if !r.match {
 			ok = false
-			fmt.Printf("error: %s mismatch\n", fileName)
+			fmt.Printf("error: %s mismatch\n", r.fileName)
 		}
 	}
 
@@ -71,6 +85,26 @@ func main() {
 	if !ok {
 		os.Exit(1)
 	}
+}
+
+func sigWorker(fileName, signature string, ch chan<- result) {
+	r := result{fileName: fileName}
+	sig, err := fileSig(fileName)
+	if err != nil {
+		r.err = err
+	} else {
+		r.match = sig == signature
+	}
+
+	ch <- r
+}
+
+type result struct {
+	// call context
+	fileName string
+
+	match bool
+	err   error
 }
 
 func fileSig(path string) (string, error) {
