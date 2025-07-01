@@ -84,6 +84,27 @@ func main() {
 
 	start := time.Now()
 
+	// fanOutWait()
+	fanOutResult()
+
+	duration := time.Since(start)
+	fmt.Printf("%d URLs in %v\n", len(urls), duration)
+}
+
+func fanOutResult() {
+
+}
+
+func urlCheck(url string) (int, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return 0, err
+	}
+
+	return resp.StatusCode, nil
+}
+
+func fanOutWait(urls []string) {
 	var wg sync.WaitGroup
 	wg.Add(len(urls))
 	for _, url := range urls {
@@ -95,8 +116,6 @@ func main() {
 	}
 
 	wg.Wait()
-	duration := time.Since(start)
-	fmt.Printf("%d URLs in %v\n", len(urls), duration)
 }
 
 func urlInfo(url string) {
