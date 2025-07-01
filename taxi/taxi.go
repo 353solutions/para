@@ -13,6 +13,7 @@ they math the ones in the index file.
   - If there's a mismatch, print the offending file(s) and exit the program with
     non-zero value
 
+$ cd /tmp
 $ curl -LO  https://storage.googleapis.com/353solutions/c/data/taxi.tar
 $ tar xf taxi.tar
 
