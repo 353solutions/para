@@ -20,8 +20,18 @@ func main() {
 // If bestBid finish in time, return the result it gave
 // Otherwise, return default bid
 func bidOn(ctx context.Context, url string) Bid {
-	// TODO: Your code goes here
-	return Bid{}
+	ch := make(chan Bid, 1) // buffered to avoid goroutine leak
+	go func() {
+		bid := bestBid(url)
+		ch <- bid
+	}()
+
+	select {
+	case bid := <-ch:
+		return bid
+	case <-ctx.Done():
+		return defaultBid
+	}
 }
 
 var defaultBid = Bid{
