@@ -9,6 +9,12 @@ import (
 )
 
 func main() {
+	a, b := 0.1, 0.2
+	fmt.Println(a + b)
+	fmt.Println(0.1 + 0.2) // constants are more accurate than variables, compile time
+}
+
+func decDemo() {
 	/*
 		a, b := 1.1, 2.2
 		fmt.Println(a + b)

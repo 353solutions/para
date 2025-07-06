@@ -136,6 +136,14 @@ Miki Tebeka
 - [taxi.go](taxi/taxi.go) - Convert serial code to concurrent
 - [fan_in.go](fan_in/fan_in.go) - Fan-in pattern
 
+
+- [counter.go](counter/counter.go) - race detector, sync.Mutex & atomic
+- [token.go](token/token.go) - Refresh token, sync.RWMutex
+- [token_chan.go](token_chan/token_chan.go) - Refresh token with channels
+- [pmap.go](pmap/pmap.go) - Parallel map
+- [pool.go](pool/pool.go) - Using buffered channel for pool
+- [payment.go](payment/payment.go) - sync.Once
+
 ### Links
 
 - [automaxprocs](https://pkg.go.dev/go.uber.org/automaxprocs@v1.6.0/maxprocs)
@@ -158,6 +166,13 @@ Miki Tebeka
 - [Profile-guided optimization](https://go.dev/doc/pgo)
 - [Rubber Duck Debugging](https://en.wikipedia.org/wiki/Rubber_duck_debugging)
 - [Feynman Algorithm](https://wiki.c2.com/?FeynmanAlgorithm)
+- [conc](https://github.com/sourcegraph/conc)
+- [Using Formal Reasoning to Build Concurrent Go Systems](https://www.youtube.com/watch?v=yiVOJqXTWfc) video
+- [TLA+](https://learntla.com/#)
+- [golang.org/x/sync/semaphore](https://pkg.go.dev/golang.org/x/sync/semaphore)
+- [goleak](https://github.com/uber-go/goleak) - Find goroutines leak
+- [htmx](https://htmx.org/)
+- [Ultimate Go Tour](https://tour.ardanlabs.com/tour/eng/list)
 
 
 ### Data & More

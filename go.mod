@@ -7,11 +7,11 @@ go 1.24
 tool golang.org/x/perf/cmd/benchstat
 
 // go install golang.org/x/perf/cmd/benchstat@latest
-// Will be at $(go env GOPATH)/bin
 
 require (
-	github.com/google/uuid v1.6.0
-	go.etcd.io/bbolt v1.4.0
+	github.com/google/uuid v1.3.0
+	go.etcd.io/bbolt v1.4.2
+	golang.org/x/sync v0.15.0
 )
 
 require (
