@@ -19,6 +19,12 @@ func main() {
 }
 
 func (t Token) Value() string {
+	return "" // FIXME
+
+}
+
+func NewToken() Token {
+	return Token{}
 
 }
 
