@@ -6,11 +6,15 @@ import (
 )
 
 func main() {
+	start := time.Now()
 	vals := PMap(int2str, []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, 3)
 	fmt.Printf("%#v\n", vals) // ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+	fmt.Println(time.Since(start))
 
+	start = time.Now()
 	iVals := PMap(inc, []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, 3)
 	fmt.Printf("%#v\n", iVals) // [2, 3, 4, 5, 6, 7, 8, 9, 10]
+	fmt.Println(time.Since(start))
 
 }
 
