@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"sync"
 	"time"
 )
 
@@ -27,46 +26,48 @@ func (t *Token) Close() {
 }
 
 func (t *Token) Value() string {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-
-	return t.value
-
+	cmd := Cmd{
+		ch: make(chan string, 1), // Don't block tokenWorker on return
+	}
+	t.ch <- cmd
+	tok := <-cmd.ch
+	return tok
 }
 
 func NewToken() *Token {
 	ctx, cancel := context.WithCancel(context.Background())
 	t := Token{
-		value:  RefreshToken(),
 		cancel: cancel,
+		ch:     make(chan Cmd),
 	}
 
-	go func() {
-		// BUG: Goroutine leak
-		// for range time.Tick(300 * time.Millisecond) {
-		tick := time.NewTicker(300 * time.Millisecond)
-		for {
-			select {
-			case <-tick.C:
-				tok := RefreshToken()
-				// Rule of thumb: Do as less as possible inside mutex
-				t.mu.Lock() // write lock
-				t.value = tok
-				t.mu.Unlock()
-			case <-ctx.Done():
-				fmt.Println("Close")
-				return
-			}
-		}
-	}()
+	go tokenWorker(ctx, t.ch)
 
 	return &t
 }
 
+func tokenWorker(ctx context.Context, ch chan Cmd) {
+	tick := time.NewTicker(300 * time.Millisecond)
+	tok := RefreshToken()
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case <-tick.C:
+			tok = RefreshToken()
+		case cmd := <-ch:
+			cmd.ch <- tok
+		}
+	}
+}
+
+type Cmd struct {
+	ch chan string
+}
+
 // Token refreshed the token every 300ms
 type Token struct {
-	mu     sync.RWMutex // single writer, multiple readers
-	value  string
+	ch     chan Cmd
 	cancel context.CancelFunc
 }
 
