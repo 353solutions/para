@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
 	vals := PMap(int2str, []int{1, 2, 3, 4, 5, 6, 7, 8, 9}, 3)
@@ -12,10 +15,12 @@ func main() {
 }
 
 func inc(n int) int {
+	time.Sleep(100 * time.Millisecond)
 	return n + 1
 }
 
 func int2str(i int) string {
+	time.Sleep(100 * time.Millisecond)
 	return fmt.Sprintf("%d", i)
 }
 
