@@ -2,7 +2,7 @@ package tokenizer_test
 
 import (
 	"fmt"
-	"para/tokenizer"
+	"para/session_2/tokenizer"
 )
 
 func ExampleTokenize() {

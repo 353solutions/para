@@ -35,13 +35,13 @@ Miki Tebeka
 ### Code
 
 
-- [cars](cars/) - HTTP Server
+- [cars](session_1/cars/) - HTTP Server
 
-- [value.go](value/value.go) - Custom serialization
-- [vm.go](vm/vm.go) - Missing vs Zero values
-- [logs.go](logs/logs.go) - Streaming JSON
-- [closure.go](closure/closure.go) - Closure capture bug (Go 1.22)
-- [client.go](events/client.go) - Making HTTP calls
+- [value.go](session_1/value/value.go) - Custom serialization
+- [vm.go](session_1/vm/vm.go) - Missing vs Zero values
+- [logs.go](session_1/logs/logs.go) - Streaming JSON
+- [closure.go](session_1/closure/closure.go) - Closure capture bug (Go 1.22)
+- [client.go](session_1/events/client.go) - Making HTTP calls
 
 ### Links
 
@@ -91,11 +91,11 @@ Miki Tebeka
 
 ### Code
 
-- [tokenizer](tokenizer) - Optimizing algorithm & memory allocations
-- [slice.go](slice/slice.go) - How slices work
+- [tokenizer](session_2/tokenizer) - Optimizing algorithm & memory allocations
+- [slice.go](session_2/slice/slice.go) - How slices work
 - [playground.go](playground/playground.go) - Misc
-- [store](store) - Cache & better serialization
-- [matrix.go](matrix/matrix.go) - Getting friendly with the CPU cache
+- [store](session_2/store) - Cache & better serialization
+- [matrix.go](session_2/matrix/matrix.go) - Getting friendly with the CPU cache
 
 ### Links
 
@@ -131,18 +131,18 @@ Miki Tebeka
 ### Code
 
 
-- [go_chan.go](go_chan/go_chan.go) - Channel semantics, fan-out, goroutine pool
-- [rtb.go](rtb/rtb.go) - Context & cancellation
-- [taxi.go](taxi/taxi.go) - Convert serial code to concurrent
-- [fan_in.go](fan_in/fan_in.go) - Fan-in pattern
+- [go_chan.go](session_3/go_chan/go_chan.go) - Channel semantics, fan-out, goroutine pool
+- [rtb.go](session_3/rtb/rtb.go) - Context & cancellation
+- [taxi.go](session_3/taxi/taxi.go) - Convert serial code to concurrent
+- [fan_in.go](session_3/fan_in/fan_in.go) - Fan-in pattern
 
 
-- [counter.go](counter/counter.go) - race detector, sync.Mutex & atomic
-- [token.go](token/token.go) - Refresh token, sync.RWMutex
-- [token_chan.go](token_chan/token_chan.go) - Refresh token with channels
-- [pmap.go](pmap/pmap.go) - Parallel map
-- [pool.go](pool/pool.go) - Using buffered channel for pool
-- [payment.go](payment/payment.go) - sync.Once
+- [counter.go](session_3/counter/counter.go) - race detector, sync.Mutex & atomic
+- [token.go](session_3/token/token.go) - Refresh token, sync.RWMutex
+- [token_chan.go](session_3/token_chan/token_chan.go) - Refresh token with channels
+- [pmap.go](session_3/pmap/pmap.go) - Parallel map
+- [pool.go](session_3/pool/pool.go) - Using buffered channel for pool
+- [payment.go](session_3/payment/payment.go) - sync.Once
 
 ### Links
 
@@ -194,8 +194,12 @@ Miki Tebeka
 
 ### Code
 
-TBD
 
+- [inc.go](session_4/inc/inc.go) - Value vs Pointer sematics
+- [game.py](session_4/game/game.py) - Structs, methods & interfaces
+- [error.go](session_4/error/error.go) - What's a nil interface
+- [sha1.go](session_4/sha1/sha1.go) - Calculate sha1, compose io.Reader & io.Writer
+- [wc.go](session_4/wc/wc.go) - Implement io.Writer for word count
 
 ### Links
 
@@ -204,3 +208,5 @@ TBD
 - [Generics tutorial](https://go.dev/doc/tutorial/generics)
 - [Methods, interfaces & embedded types in Go](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html)
 - [Methods & Interfaces](https://go.dev/tour/methods/1) in the Go tour
+- [wc docs](https://www.gnu.org/software/coreutils/manual/html_node/wc-invocation.html#wc-invocation)
+- [stringer command](https://pkg.go.dev/golang.org/x/tools/cmd/stringer)
