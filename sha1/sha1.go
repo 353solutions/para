@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -25,12 +26,19 @@ func FileSHA1(fileName string) (string, error) {
 		return "", err
 	}
 	defer file.Close()
-	// | gunzip
-	r, err := gzip.NewReader(file)
-	if err != nil {
-		return "", fmt.Errorf("gzip %q: %w", fileName, err)
+
+	var r io.Reader = file
+
+	if strings.HasSuffix(fileName, ".gz") {
+		// | gunzip
+		gz, err := gzip.NewReader(file)
+		if err != nil {
+			return "", fmt.Errorf("gzip %q: %w", fileName, err)
+		}
+		defer gz.Close()
+
+		r = gz
 	}
-	defer r.Close()
 
 	// | sha1sum
 	w := sha1.New()
