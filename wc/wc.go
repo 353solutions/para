@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"unicode"
 )
 
 // Exercise: Write the "wc" utility by implementing io.Writer
@@ -22,4 +23,28 @@ func main() {
 	fmt.Println(wc)
 }
 
-type WC struct{}
+// Write implement io.Writer
+func (wc *WC) Write(p []byte) (int, error) {
+	wc.bytes += len(p)
+	inWord := false
+	for _, b := range p {
+		if b == '\n' {
+			wc.lines++
+		}
+
+		if !inWord && !unicode.IsSpace(rune(b)) {
+			inWord = true
+			wc.words++
+		} else if inWord && unicode.IsSpace(rune(b)) {
+			inWord = false
+		}
+	}
+
+	return len(p), nil
+}
+
+type WC struct {
+	bytes int
+	lines int
+	words int
+}
