@@ -14,6 +14,22 @@ func main() {
 		}
 	}
 	fmt.Println(nums[:10])
+
+	// concat two slices
+	s := []int{1, 2, 3, 4}
+	s1 := s[:3:3] // set also capacity
+	s1[0] = -1
+	fmt.Println(len(s1), cap(s1))
+	s2 := []int{500} //, 600}
+	s3 := append(s1, s2...)
+	fmt.Println(s3)
+	fmt.Println(s)
+
+	arr := [3]int{1, 2, 3} // arr is an array, arrays are passed by value
+	// array type includes the size
+	fmt.Println("arr:", arr)
+	s = arr[:]
+	fmt.Println("s:", s) // work with slice
 }
 
 func appendInt(s []int, n int) []int {
