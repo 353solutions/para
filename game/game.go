@@ -16,6 +16,53 @@ func main() {
 	i2.Move(3, 4) // Go will pass i2 as pointer to Move
 	// C++: i2->Move(3, 4);
 	fmt.Println("i2 (move):", i2)
+
+	p1 := Player{
+		Name: "Parzival",
+	}
+	// embedding "lifts" fields and methods to embedding type
+	fmt.Println("p1.X:", p1.X)
+	// fmt.Println("p1.Item.X:", p1.Item.X)
+	p1.Move(300, 400)
+	fmt.Println("p1 (move):", p1)
+
+	ms := []Mover{
+		i,
+		&i2, // must match receiver type
+		&p1,
+	}
+	moveAll(ms, 100, 100)
+	for _, m := range ms {
+		fmt.Println(m)
+	}
+
+}
+
+func moveAll(ms []Mover, x, y int) {
+	for _, m := range ms {
+		m.Move(x, y)
+	}
+}
+
+/*
+	interfaces
+
+- Set of methods (and types)
+- We say what we need, not what we provide
+- Interface are small (stdlib average < 2 methods), my rule if up to 4
+- Rule of thumb: Accept interface, return types
+- Interface should be discovered, start with concrete types
+*/
+
+type Mover interface {
+	Move(int, int)
+}
+
+type Player struct {
+	Name string
+	Item // Player embeds Item
+
+	// X    string
 }
 
 // value -> pointer is OK : inc(&n)
@@ -23,6 +70,7 @@ func main() {
 
 // i is called "the receiver"
 // i is a pointer receiver
+
 func (i *Item) Move(x, y int) {
 	i.X = x
 	i.Y = y
