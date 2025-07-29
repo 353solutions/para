@@ -210,3 +210,8 @@ Miki Tebeka
 - [Methods & Interfaces](https://go.dev/tour/methods/1) in the Go tour
 - [wc docs](https://www.gnu.org/software/coreutils/manual/html_node/wc-invocation.html#wc-invocation)
 - [stringer command](https://pkg.go.dev/golang.org/x/tools/cmd/stringer)
+- [List of file signatures](https://en.wikipedia.org/wiki/List_of_file_signatures)
+- [The Art of Unix Programming](http://www.catb.org/esr/writings/taoup/html/ch01s06.html)
+- [Method Sets](https://www.youtube.com/watch?v=Z5cvLOrWlLM)
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "723fc972008441c5b4e096cd03c8ef5a"}'></script><!-- End Cloudflare Web Analytics -->
