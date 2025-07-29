@@ -36,6 +36,9 @@ func main() {
 		fmt.Println(m)
 	}
 
+	fmt.Println("Copper:", Copper)
+	fmt.Println("Unknown:", Key(17))
+
 }
 
 func moveAll(ms []Mover, x, y int) {
@@ -52,7 +55,50 @@ func moveAll(ms []Mover, x, y int) {
 - Interface are small (stdlib average < 2 methods), my rule if up to 4
 - Rule of thumb: Accept interface, return types
 - Interface should be discovered, start with concrete types
+- Users for interfaces
+	 - Polymorphism
+	 - Mocks
+	 - How stdlib handles your types
 */
+
+/*
+	What fmt.Println and friends do:
+
+	func Print(v any) {
+		if s, ok := v.(fmt.Stringer); ok {
+			print(s.String())
+			return
+		}
+
+		switch v.(type) {
+			case string:
+				// ...
+		}
+	}
+*/
+
+// String implements fmt.Stringer
+
+func (k Key) String() string {
+	switch k {
+	case Copper:
+		return "copper"
+	case Jade:
+		return "jade"
+	case Crystal:
+		return "crystal"
+	}
+
+	return fmt.Sprintf("Key(%d)", k)
+}
+
+type Key uint8
+
+const (
+	Copper Key = iota + 1
+	Jade
+	Crystal
+)
 
 type Mover interface {
 	Move(int, int)
@@ -106,3 +152,23 @@ type Item struct {
 	X int
 	Y int
 }
+
+// go install golang.org/x/tools/cmd/stringer
+// $(go env GOPATH$)/bin/stringer -type Key
+
+// go 1.24 +
+// tool directive in go.mod
+// go tool stringer -type Key
+
+/* Thought experiment: Sorting
+
+type Sortable interface {
+	Less(i, j int) bool
+	Len() int
+	Swap(i, j int)
+}
+
+func Sort(s Sortable) {
+	// Sort s
+}
+*/
