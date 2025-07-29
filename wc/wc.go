@@ -12,6 +12,7 @@ import (
 // -l lines
 // -w words
 
+// go run wc.go < wc.go
 func main() {
 	var wc WC
 	if _, err := io.Copy(&wc, os.Stdin); err != nil {
