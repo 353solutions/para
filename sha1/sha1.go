@@ -14,6 +14,8 @@ func main() {
 
 }
 
+// Exercise: Decompress only if fileName ends with .gz
+
 // cat http.log.gz| gunzip| sha1sum
 // cat sha1.go| sha1sum
 func FileSHA1(fileName string) (string, error) {
