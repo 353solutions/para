@@ -206,6 +206,7 @@ Miki Tebeka
 - [sort examples](https://pkg.go.dev/sort/#pkg-examples) - Read and try to understand
 - [When to use generics](https://go.dev/blog/when-generics)
 - [Generics tutorial](https://go.dev/doc/tutorial/generics)
+- [Generic Interfaces](https://go.dev/blog/generic-interfaces)
 - [Methods, interfaces & embedded types in Go](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html)
 - [Methods & Interfaces](https://go.dev/tour/methods/1) in the Go tour
 - [wc docs](https://www.gnu.org/software/coreutils/manual/html_node/wc-invocation.html#wc-invocation)
@@ -213,3 +214,44 @@ Miki Tebeka
 - [List of file signatures](https://en.wikipedia.org/wiki/List_of_file_signatures)
 - [The Art of Unix Programming](http://www.catb.org/esr/writings/taoup/html/ch01s06.html)
 - [Method Sets](https://www.youtube.com/watch?v=Z5cvLOrWlLM)
+
+
+---
+
+## Session 5: Project Engineers
+
+### Agenda
+
+- Creating go executables  
+  - Injecting version  
+  - Embedding assets  
+- Configuration & command line parsing  
+- Logging & metrics  
+- Writing secure Go code
+
+### Code
+
+TBD
+
+
+### Links
+
+- [Using ldflags to Set Version Information for Go Applications](https://www.digitalocean.com/community/tutorials/using-ldflags-to-set-version-information-for-go-applications)
+- [GoReleaser](https://goreleaser.com/)
+    - [GitHub Action](https://github.com/goreleaser/goreleaser-action)
+- [Using Zig to Compile Cgo](https://github.com/goreleaser/example-zig-cgo)
+- Command line & Options
+    - [flag](https://pkg.go.dev/flag)
+    - [Cobra](https://cobra.dev/) + [Viper](https://github.com/spf13/viper)
+    - Ardan Labs [conf](https://pkg.go.dev/github.com/ardanlabs/conf/v3)
+- Security
+    - [mkcert](https://github.com/FiloSottile/mkcert)
+    - [x/crypto/autocert](https://pkg.go.dev/golang.org/x/crypto/acme/autocert)
+    - [Using Let's Encrypt in Go](https://marcofranssen.nl/build-a-go-webserver-on-http-2-using-letsencrypt)
+    - [Customizing Binaries with Build Tags](https://www.digitalocean.com/community/tutorials/customizing-go-binaries-with-build-tags)
+
+
+### Data & Other
+
+- [gopher.txt](_extra/gopher.txt)
+- [Secure Code Slides](_extra/secure-go.pdf)
