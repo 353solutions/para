@@ -1,6 +1,7 @@
 package main
 
 import (
+	"cmp"
 	"fmt"
 	"time"
 )
@@ -26,10 +27,106 @@ func main() {
 		"a":     3902,
 		"hello": 12,
 	}
-	fmt.Println(MaxMap(freq))
+	fmt.Println(MaxMap(freq)) // the <nil>
+	m, err := NewMatrix[float64](10, 3)
+	if err != nil {
+		fmt.Println("ERROR:", err)
+		return
+	}
+	fmt.Println(m.At(3, 2))
 }
 
-// Exercise: Write a generic MaxMap that gets a map and return the key with maximal value
+// Limitation: Can't have generic method arguments
+func (m *Matrix[T]) At(row, col int) (T, error) {
+	i := row*m.Cols + col
+	if i >= len(m.data) {
+		var zero T
+		return zero, fmt.Errorf("%d/%d out of range for %d/%d", row, col, m.Rows, m.Cols)
+	}
+
+	return m.data[i], nil
+}
+
+func NewMatrix[T Number](rows, cols int) (*Matrix[T], error) {
+	if rows <= 0 || cols <= 0 {
+		return nil, fmt.Errorf("%d/%d - bad dimension", rows, cols)
+	}
+
+	m := Matrix[T]{
+		Rows: rows,
+		Cols: cols,
+
+		data: make([]T, rows*cols),
+	}
+
+	return &m, nil
+}
+
+type Matrix[T Number] struct {
+	Rows int
+	Cols int
+
+	data []T
+}
+
+type Number interface {
+	~int | ~float64
+}
+
+type Handler interface {
+	User | Event
+	GetID() int
+}
+
+// func Handle[T User | Event](v T) {
+func Handle[T Handler](v T) {
+	// fmt.Println(v.ID) // Compile error: can't access field structs
+	fmt.Println(v.GetID())
+
+	// In the case of this implementation, use interfaces without generics
+}
+
+// Python uses duck typing
+
+func (u User) GetID() int {
+	return u.ID
+}
+
+type User struct {
+	ID int
+}
+
+func (e Event) GetID() int {
+	return e.ID
+}
+
+type Event struct {
+	Name string
+	ID   int
+}
+
+// type User = users.User
+
+// Exercise: Write a generic MaxMap that gets a map and returns the key with maximal value.
+// Return error on empty map.
+func MaxMap[K comparable, V cmp.Ordered](m map[K]V) (K, error) {
+	if len(m) == 0 {
+		return zero[K](), fmt.Errorf("max on empty map")
+	}
+
+	var maxK K
+	var maxV V
+	first := true
+
+	for k, v := range m {
+		if first || v > maxV {
+			maxK, maxV = k, v
+			first = false
+		}
+	}
+
+	return maxK, nil
+}
 
 /*
 $ dlv debug .

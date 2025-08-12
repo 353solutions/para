@@ -201,12 +201,21 @@ Miki Tebeka
 - [sha1.go](session_4/sha1/sha1.go) - Calculate sha1, compose io.Reader & io.Writer
 - [wc.go](session_4/wc/wc.go) - Implement io.Writer for word count
 
+
+- [empty.go](session_4/empty/empty.go) - The empty interface (`any`)
+- [logger.go](session_4/logger/logger.go) - Keeping interface small
+- [client_test.go](session_4/client/client_test.go) - Mocking HTTP transport
+    - [client.go](session_4/client/client.go)
+- [stats.go](session_4/stats/stats.go) - Generics
+- [iter.go](session_4/iter/iter.go) - Iterators
+
 ### Links
 
 - [sort examples](https://pkg.go.dev/sort/#pkg-examples) - Read and try to understand
 - [When to use generics](https://go.dev/blog/when-generics)
 - [Generics tutorial](https://go.dev/doc/tutorial/generics)
 - [Generic Interfaces](https://go.dev/blog/generic-interfaces)
+- [Generics can make your Go code slower](https://planetscale.com/blog/generics-can-make-your-go-code-slower)
 - [Methods, interfaces & embedded types in Go](https://www.ardanlabs.com/blog/2014/05/methods-interfaces-and-embedded-types.html)
 - [Methods & Interfaces](https://go.dev/tour/methods/1) in the Go tour
 - [wc docs](https://www.gnu.org/software/coreutils/manual/html_node/wc-invocation.html#wc-invocation)
@@ -214,8 +223,13 @@ Miki Tebeka
 - [List of file signatures](https://en.wikipedia.org/wiki/List_of_file_signatures)
 - [The Art of Unix Programming](http://www.catb.org/esr/writings/taoup/html/ch01s06.html)
 - [Method Sets](https://www.youtube.com/watch?v=Z5cvLOrWlLM)
+- [lru_cache](https://pkg.go.dev/github.com/hashicorp/golang-lru/v2)
+- [From Nand to Tetris](https://www.nand2tetris.org/)
+- [bubbletea](https://github.com/charmbracelet/bubbletea) UI for the terminal (TUI)
+    - [huh](https://github.com/charmbracelet/huh)
+    - [crush](https://github.com/charmbracelet/crush)
 
-
+<!--
 ---
 
 ## Session 5: Project Engineers
@@ -256,3 +270,4 @@ TBD
 
 - [gopher.txt](_extra/gopher.txt)
 - [Secure Code Slides](_extra/secure-go.pdf)
+-->
