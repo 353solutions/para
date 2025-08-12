@@ -239,6 +239,7 @@ TBD
 - [Using ldflags to Set Version Information for Go Applications](https://www.digitalocean.com/community/tutorials/using-ldflags-to-set-version-information-for-go-applications)
 - [GoReleaser](https://goreleaser.com/)
     - [GitHub Action](https://github.com/goreleaser/goreleaser-action)
+- [svu](https://github.com/caarlos0/svu) - Bump version
 - [Using Zig to Compile Cgo](https://github.com/goreleaser/example-zig-cgo)
 - Command line & Options
     - [flag](https://pkg.go.dev/flag)

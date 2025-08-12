@@ -23,20 +23,23 @@ func main() {
 	fmt.Println(wc)
 }
 
+// hello there
+// hello t
+// here
+
 // Write implement io.Writer
 func (wc *WC) Write(p []byte) (int, error) {
 	wc.bytes += len(p)
-	inWord := false
 	for _, b := range p {
 		if b == '\n' {
 			wc.lines++
 		}
 
-		if !inWord && !unicode.IsSpace(rune(b)) {
-			inWord = true
+		if !wc.inWord && !unicode.IsSpace(rune(b)) {
+			wc.inWord = true
 			wc.words++
-		} else if inWord && unicode.IsSpace(rune(b)) {
-			inWord = false
+		} else if wc.inWord && unicode.IsSpace(rune(b)) {
+			wc.inWord = false
 		}
 	}
 
@@ -47,4 +50,6 @@ type WC struct {
 	bytes int
 	lines int
 	words int
+
+	inWord bool
 }
