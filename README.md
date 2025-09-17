@@ -243,7 +243,7 @@ Miki Tebeka
 
 ### Code
 
-TBD
+- [gosay.go](session_5/gosay/gosay.go) - Building executables
 
 ### Links
 
@@ -275,6 +275,19 @@ TBD
 - [Leek & Seek](https://www.youtube.com/watch?v=94wG_LJH86U) - A lot of diagnostic advices and tools
 - [Go: Monitor your goroutine](https://medium.com/@hax.artisan/go-monitor-your-goroutine-application-9edbdd6e581b)
 - [Diagnostics](https://go.dev/doc/diagnostics) in the Go docs
+- [go-cleanhttp](https://github.com/hashicorp/go-cleanhttp)
+- Validation
+    - [cuelang](https://cuelang.org/docs/introduction/)
+    - [validator](https://github.com/go-playground/validator)
+- [The new go-yaml](https://github.com/yaml/go-yaml)
+- [Crafting Interpreters](https://craftinginterpreters.com/) book
+- [net package name resolution](https://pkg.go.dev/net#hdr-Name_Resolution)
+- [Real Programmers](https://xkcd.com/378/)
+- [Semantic Versioning](https://semver.org/)
+- [sqlc](https://sqlc.dev/) - Compile SQL to Go
+- [starship](https://starship.rs/) - The prompt Miki use
+- [Ballmer Peak](https://xkcd.com/323/)
+
 
 - [Structured Logging with slog](https://go.dev/blog/slog)
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)

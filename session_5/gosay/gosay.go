@@ -29,6 +29,29 @@ var options struct {
 	listImages  bool
 }
 
+/* Options: default < configuration file < environment < command line
+defaults: code
+configuration file: nothing in stdlib. Outside: YAML & TOML, viper ...
+environment: os.Getenv, outside: viper, ardanlabs/conf ...
+command line: flag, outside: cobra, cli, ardanlabs/conf ...
+
+It's hard to do hierarchy in environment and command line.
+type Config struct {
+    Server struct {
+	    Port int
+	},
+	Log struct {
+	    Level string
+	}
+}
+
+APP_HTTP__PORT=8080
+--server.port=8080
+
+Design configuration, don't let it grow organically.
+Think what to do about secret
+*/
+
 func main() {
 	flag.BoolVar(&options.showVersion, "version", false, "show version & exit")
 	flag.BoolVar(&options.cow, "cow", false, "use cowsay API")
@@ -41,6 +64,8 @@ func main() {
 
 	}
 	flag.Parse()
+
+	// Here options should be parsed & validated!
 
 	if options.showVersion {
 		fmt.Printf("%s version %s\n", path.Base(os.Args[0]), version)
