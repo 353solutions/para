@@ -5,10 +5,12 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"io/fs"
 	"net/http"
 	"net/url"
 	"os"
 	"path"
+	"slices"
 	"strings"
 	"time"
 
@@ -23,11 +25,15 @@ var version = "<dev>"
 var options struct {
 	showVersion bool
 	cow         bool
+	image       string
+	listImages  bool
 }
 
 func main() {
 	flag.BoolVar(&options.showVersion, "version", false, "show version & exit")
 	flag.BoolVar(&options.cow, "cow", false, "use cowsay API")
+	flag.StringVar(&options.image, "image", "", "image to use")
+	flag.BoolVar(&options.listImages, "list-images", false, "list images")
 	flag.Usage = func() {
 		prog := path.Base(os.Args[0])
 		fmt.Fprintf(os.Stderr, "usage: %s TEXT\n", prog)
@@ -41,8 +47,34 @@ func main() {
 		os.Exit(0)
 	}
 
+	if options.listImages {
+		dirs, err := fs.ReadDir(images, "images")
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "error: read images directory - %s\n", err)
+			os.Exit(1)
+
+		}
+
+		names := make([]string, 0, 1+len(dirs))
+		names = append(names, "gopher")
+		for _, d := range dirs {
+			names = append(names, d.Name()[:len(d.Name())-4])
+		}
+		// Show to humans
+		slices.Sort(names)
+		for _, name := range names {
+			fmt.Println(name)
+		}
+		os.Exit(0)
+	}
+
 	if flag.NArg() != 1 {
 		fmt.Fprintln(os.Stderr, "error: wrong number of arguments")
+		os.Exit(1)
+	}
+
+	if options.cow && options.image != "" {
+		fmt.Fprintln(os.Stderr, "error: can't use --cow with --image")
 		os.Exit(1)
 	}
 
@@ -52,18 +84,50 @@ func main() {
 		os.Exit(0)
 	}
 
+	var file fs.File
+	if userImage() {
+		var err error
+		file, err = images.Open("images/" + options.image + ".txt")
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "error: load %q - %s\n", options.image, err)
+			os.Exit(1)
+		}
+	}
+
 	width := len(text)
 	fmt.Printf("  %s\n", strings.Repeat("-", width))
 	fmt.Printf("< %s >\n", text)
 	fmt.Printf("  %s\n", strings.Repeat("-", width))
-	fmt.Println(gopher)
+	if !userImage() {
+		fmt.Println(gopher)
+	} else {
+		io.Copy(os.Stdout, file)
+	}
+}
+
+func userImage() bool {
+	return options.image != "" && options.image != gopherName
 }
 
 //go:embed gopher.txt
 var gopher string
 
-//go:embed *
-var assets embed.FS
+const gopherName = "gopher"
+
+//go:embed images
+var images embed.FS
+
+/*
+var fsImages fs.FS
+
+func init() {
+	var err error
+	fsImages, err = fs.Sub(eImages, "images")
+	if err != nil {
+		panic(err)
+	}
+}
+*/
 
 /*
 	Usage for embed
@@ -78,6 +142,7 @@ var assets embed.FS
 // Exercise: Add a --image flag that will use image from the images directory
 // If not specified use gopher.txt
 // Embed the images directory to the executable
+// Extra: Add --list-images
 func cow(text string) error {
 	q := url.Values{}
 	q.Add("message", text)
@@ -111,4 +176,9 @@ $ GOOS=darwin GOARCH=arm64 go build
 $ go tool dist list
 $ ldd gosay (Linux)
 $ otool -L (OSX)
+
+$ go run . --help
+$ go run . --version
+$ go run . Gopher
+$ go run . --cow Gopher
 */
