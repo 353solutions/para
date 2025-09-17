@@ -2,3 +2,4 @@
 *.pprof
 *.test
 trace.out
+dist
