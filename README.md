@@ -299,4 +299,38 @@ Miki Tebeka
 - [Secure Code Slides](_extra/secure-go.pdf)
 - [journal.tar.gz](_extra/journal.tar.gz)
 
+---
+## Session 6: Testing
+
+### Agenda
+
+- Running services
+- Mocking and when to avoid them
+- Reading test data from files
+- Fuzzing
+
+### Code
+
+- [unter](session_6/unter)
+
+### Links
+
+- Linters
+    - [staticcheck](https://staticcheck.dev/)
+    - [golangci-lint](https://golangci-lint.run/)
+    - [x/tools/analysis](https://pkg.go.dev/golang.org/x/tools/go/analysis) - Write your own
+- [Getting Started with Fuzzing](https://go.dev/doc/tutorial/fuzz)
+- [Testcontainers for Go](https://golang.testcontainers.org/)
+- [distroless](https://github.com/GoogleContainerTools/distroless) - Hardened Docker images
+- [go-faker](https://github.com/go-faker/faker/blob/main/example_with_tags_test.go) - Generate fake data (email ...)
+- [RESP Client for VSCode](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+
+### Data & Other
+
+```
+¯\_(ツ)_/¯
+```
+
+
 ![](https://pixel-73339669570.me-west1.run.app/p/para1/p.png)
