@@ -60,9 +60,9 @@ func (a *API) Get(w http.ResponseWriter, r *http.Request) {
 
 	resp := map[string]any{
 		"id":       rd.ID,
-		"distance": rd.Distance,
+		"distance": rd.DistanceKM,
 		"shared":   rd.Shared,
-		"price":    RidePrice(rd.Distance, rd.Shared),
+		"price":    RidePrice(rd.DistanceKM, rd.Shared),
 	}
 	a.sendJSON(w, resp)
 }
