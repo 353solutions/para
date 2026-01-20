@@ -7,6 +7,15 @@ import (
 	"os"
 )
 
+func buildMux(api *API) *http.ServeMux {
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /health", api.Health)
+	mux.HandleFunc("POST /rides", api.Add)
+	mux.HandleFunc("GET /ride/{id}", api.Get)
+
+	return mux
+}
+
 func main() {
 	log := slog.Default().With("app", "unter")
 	dbFile := os.Getenv("UNTER_DB")
@@ -28,10 +37,8 @@ func main() {
 		log: log,
 		db:  db,
 	}
-	mux := http.NewServeMux()
-	mux.HandleFunc("GET /health", api.Health)
-	mux.HandleFunc("POST /rides", api.Add)
-	mux.HandleFunc("GET /ride/{id}", api.Get)
+
+	mux := buildMux(&api)
 
 	srv := http.Server{
 		Addr:    addr,

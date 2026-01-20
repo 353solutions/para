@@ -1,0 +1,3 @@
+go test fuzz v1
+float64(-15.2)
+bool(false)

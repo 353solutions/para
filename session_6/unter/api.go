@@ -14,6 +14,7 @@ type API struct {
 
 func (a *API) Health(w http.ResponseWriter, r *http.Request) {
 	// TODO: Health check
+	a.log.Info("Health", "remote", r.RemoteAddr)
 	fmt.Fprintln(w, "OK")
 }
 
