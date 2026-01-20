@@ -318,7 +318,10 @@ Miki Tebeka
 - Linters
     - [staticcheck](https://staticcheck.dev/)
     - [golangci-lint](https://golangci-lint.run/)
+    - [gosec](https://github.com/securego/gosec)
+    - [govulncheck](https://pkg.go.dev/golang.org/x/vuln/cmd/govulncheck)
     - [x/tools/analysis](https://pkg.go.dev/golang.org/x/tools/go/analysis) - Write your own
+    - [typos](https://github.com/crate-ci/typos)
 - [Getting Started with Fuzzing](https://go.dev/doc/tutorial/fuzz)
 - [Testcontainers for Go](https://golang.testcontainers.org/)
 - [distroless](https://github.com/GoogleContainerTools/distroless) - Hardened Docker images
