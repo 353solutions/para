@@ -5,7 +5,7 @@ import (
 )
 
 func TestRidePrice(t *testing.T) {
-	// TODO: Load test cases from testdata/price_cases.yml
+	// TODO: Load test cases from testdata/price_test.yml
 	for _, tt := range priceTests {
 
 		t.Run(tt.name, func(t *testing.T) {
