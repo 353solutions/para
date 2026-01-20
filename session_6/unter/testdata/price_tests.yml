@@ -1,0 +1,54 @@
+- name: zero distance non-shared
+  distance: 0.0
+  shared: false
+  want: 250
+
+- name: zero distance shared
+  distance: 0.0
+  shared: true
+  want: 225
+
+- name: whole number distance non-shared
+  distance: 5.0
+  shared: false
+  want: 1000
+
+- name: whole number distance shared
+  distance: 5.0
+  shared: true
+  want: 900
+
+- name: fractional distance non-shared rounds up
+  distance: 2.3
+  shared: false
+  want: 700
+
+- name: fractional distance shared rounds up
+  distance: 2.3
+  shared: true
+  want: 630
+
+- name: single mile non-shared
+  distance: 1.0
+  shared: false
+  want: 400
+
+- name: single mile shared
+  distance: 1.0
+  shared: true
+  want: 360
+
+- name: small fractional distance non-shared
+  distance: 0.1
+  shared: false
+  want: 400
+
+- name: large distance non-shared
+  distance: 20.0
+  shared: false
+  want: 3250
+
+- name: large distance shared
+  distance: 20.0
+  shared: true
+  want: 2925

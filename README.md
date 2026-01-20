@@ -324,13 +324,12 @@ Miki Tebeka
 - [distroless](https://github.com/GoogleContainerTools/distroless) - Hardened Docker images
 - [go-faker](https://github.com/go-faker/faker/blob/main/example_with_tags_test.go) - Generate fake data (email ...)
 - [RESP Client for VSCode](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+- [Jessie's AGENTS.md](https://raw.githubusercontent.com/jessfraz/dotfiles/refs/heads/main/.codex/AGENTS.md)
 
 
 ### Data & Other
 
-```
-¯\_(ツ)_/¯
-```
+- [Lies](_extra/lies.png)
 
 
 ![](https://pixel-73339669570.me-west1.run.app/p/para1/p.png)
